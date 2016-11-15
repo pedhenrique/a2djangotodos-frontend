@@ -1,0 +1,34 @@
+<form method="POST" action="">
+    <div class="form-group">
+        <input class="form-control" type="text" autofocus placeholder="Enter some todo..." #todoInput>
+        <br/>
+        <button (click)="addTodo(todoInput)" class="btn btn-primary btn-block" type="submit">Save it!</button>
+    </div>
+</form>
+<div class="row">
+    <div *ngFor="let todo of todos">
+        <div class="col-md-1">
+            <input type="checkbox" [(ngModel)]="todo.is_completed" (ngModelChange)="updateTodo(todo)">
+        </div>
+        <div class="col-md-8">
+            <span *ngIf="!todo.edit_state">{{todo.text}}</span>
+            <input *ngIf="todo.edit_state" type="text" [(ngModel)]="todo.text" (keyup.enter)="updateTodo(todo)">
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <button (click)="setEditState(todo)" class="btn btn-warning btn-block" type="submit">Edit</button>
+                </div>
+                <div class="col-md-6">
+                    <button (click)="deleteTodo(todo)" class="btn btn-danger btn-block" type="submit">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <hr/>
+        </div>
+
+    </div>
+</div>
+
+
